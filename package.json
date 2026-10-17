@@ -2,17 +2,24 @@
   "name": "entrelinhas",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~57.0.30",
     "expo-status-bar": "~57.0.1",
     "react": "19.2.3",
-    "react-native": "0.86.3"
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-web": "^0.21.2"
   },
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "start": "expo start --go --port 8081",
+    "android": "expo start --go --android --port 8081",
+    "ios": "expo start --go --ios --port 8081",
+    "web": "expo start --web --port 8081",
+    "test": "node --test tests/*.test.js",
+    "check": "expo install --check"
   },
   "private": true
 }
