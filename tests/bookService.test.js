@@ -37,3 +37,11 @@ test('dados inválidos no armazenamento não são aceitos', () => {
   assert.equal(isBookList([null]), false);
   assert.equal(isBookList([{ id: '1', title: 'Livro', author: 'Autor', status: 'erro' }]), false);
 });
+test('capa persiste ao marcar leitura e livros antigos continuam válidos', () => {
+  const book = createBook({ title: 'Livro', author: 'Autor', coverId: 12345 });
+  const saved = JSON.parse(JSON.stringify([book]));
+  assert.equal(toggleBook(saved, book.id)[0].coverId, 12345);
+  assert.equal(isBookList(saved), true);
+  assert.equal(isBookList([{ id: 'antigo', title: 'Livro', author: 'Autor', status: 'read' }]), true);
+  assert.equal(createBook({ title: 'Livro', author: 'Autor', coverId: -1 }).coverId, null);
+});

@@ -15,7 +15,14 @@ export default function useBooks() {
     catch { setError('Não foi possível abrir sua estante. Tente novamente.'); }
     finally { setLoading(false); }
   }
-  useEffect(() => { reload(); }, []);
+  useEffect(() => {
+    let active = true;
+    repository.loadBooks()
+      .then((saved) => { if (active) setBooks(saved); })
+      .catch(() => { if (active) setError('Não foi possível abrir sua estante. Tente novamente.'); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, []);
   async function persist(nextBooks) {
     if (busy.current) throw new Error('Aguarde a alteração atual terminar.');
     busy.current = true;

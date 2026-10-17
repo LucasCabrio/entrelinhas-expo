@@ -6,6 +6,7 @@ Um caderno de leituras feito com **React Native, JavaScript e Expo Go**. Projeto
 
 - Cadastra livros com título e autor.
 - Sugere livros e autores da Open Library durante a digitação; selecionar um livro preenche os dois campos.
+- Exibe capas nas sugestões, no cadastro e na estante. Imagens indisponíveis usam uma alternativa simples.
 - Permite marcar e desmarcar livros como lidos, filtrar a estante e remover com confirmação.
 - Salva a estante no aparelho com AsyncStorage. Sem conta ou backend próprio.
 - Funciona sem internet para cadastro manual e gerenciamento; só as sugestões precisam de conexão.
@@ -84,11 +85,13 @@ No React Native nativo, CORS não é aplicado como no navegador. Na prévia web,
 
 ## Limites do exemplo
 
+As capas usam a [API de capas da Open Library](https://openlibrary.org/dev/docs/api/covers). Salvamos apenas `coverId`, sem baixar arquivos: a exibição depende da rede/cache do aparelho. Livros antigos continuam funcionando sem capa. Alterar título ou autor manualmente remove a capa selecionada para evitar associar uma imagem ao livro errado. A capa do catálogo pode corresponder a outra edição.
+
 Sem sincronização, login, edição de título ou backup. Limpar os dados do Expo Go/navegador pode apagar a estante. O armazenamento não é criptografado e não deve guardar dados sensíveis. Em falha de gravação, a tela mantém os dados anteriores; em falha de leitura, novas gravações ficam bloqueadas para não sobrescrever a estante.
 
 ## Verificação realizada
 
-Oito testes automatizados passaram, as dependências foram conferidas com `expo install --check` e os bundles Android, iOS e web foram exportados com `npx expo export --platform all`. Cadastro, autocomplete real, filtros e persistência também foram conferidos na prévia web. A execução em um celular físico com Expo Go ainda precisa ser conferida no aparelho.
+Nove testes automatizados passaram, as dependências foram conferidas com `expo install --check` e os bundles Android, iOS e web foram exportados com `npx expo export --platform all`. Cadastro, autocomplete real, filtros e persistência também foram conferidos na prévia web. A execução em um celular físico com Expo Go ainda precisa ser conferida no aparelho.
 
 O `npm audit` apontou 22 alertas na árvore de dependências do SDK (7 moderados e 15 altos). As sugestões automáticas incluem trocar Expo/React Native por versões antigas incompatíveis; não foi aplicado `--force`. Esse resultado não significa que o aplicativo passou por uma auditoria de segurança.
 

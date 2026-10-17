@@ -6,13 +6,15 @@ test('busca de livros codifica consulta e preenche autor', async (t) => {
   t.mock.method(globalThis, 'fetch', async (url) => {
     assert.ok(url.includes('title=Dom%20Casmurro'));
     return { ok: true, json: async () => ({ docs: [
-      { key: '/works/1', title: 'Dom Casmurro', author_name: ['Machado de Assis'] },
+      { key: '/works/1', title: 'Dom Casmurro', author_name: ['Machado de Assis'], cover_i: 12345 },
       { key: '/works/2', title: 'Sem autor' },
     ] }) };
   });
   const books = await searchCatalog('Dom Casmurro', 'title');
   assert.equal(books[0].author, 'Machado de Assis');
   assert.equal(books[1].author, '');
+  assert.equal(books[0].coverId, 12345);
+  assert.equal(books[1].coverId, null);
 });
 test('busca de autores usa endpoint próprio', async (t) => {
   t.mock.method(globalThis, 'fetch', async (url) => {

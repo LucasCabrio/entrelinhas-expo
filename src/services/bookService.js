@@ -5,7 +5,7 @@ export const filters = [
   { value: 'read', label: 'Lidos' },
 ];
 
-export function createBook({ title, author }, existingBooks = []) {
+export function createBook({ title, author, coverId = null }, existingBooks = []) {
   const cleanTitle = title.trim();
   const cleanAuthor = author.trim();
   if (!cleanTitle || !cleanAuthor) throw new Error('Preencha o título e o autor.');
@@ -19,6 +19,7 @@ export function createBook({ title, author }, existingBooks = []) {
   return {
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
     title: cleanTitle, author: cleanAuthor, status: 'to-read',
+    coverId: Number.isSafeInteger(coverId) && coverId > 0 ? coverId : null,
   };
 }
 export function toggleBook(books, id) {
