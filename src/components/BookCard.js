@@ -9,12 +9,13 @@ export default function BookCard({ book, disabled, onToggle, onRemove }) {
       <View style={styles.details}>
         <BookCover coverId={book.coverId} title={book.title} />
         <View style={{ flex: 1 }}><Text style={styles.title}>{book.title}</Text>
-          <Text style={styles.author}>{book.author}</Text></View>
+          <Text style={styles.author}>{book.author}</Text>
+          <Text style={styles.currentStatus}>Status: {read ? 'Lido' : 'Quero ler'}</Text></View>
       </View>
       <View style={styles.actions}>
-        <Pressable accessibilityRole="button" accessibilityLabel={`${read ? 'Marcar como não lido' : 'Marcar como lido'}: ${book.title}`}
+        <Pressable accessibilityRole="button" accessibilityLabel={`${read ? 'Mover para Quero ler' : 'Marcar como lido'}: ${book.title}`}
           disabled={disabled} onPress={onToggle} style={styles.status}>
-          <Text style={styles.statusText}>{read ? '✓  Lido' : '○  Quero ler'}</Text>
+          <Text style={styles.statusText}>{read ? 'Mover para Quero ler' : 'Marcar como lido'}</Text>
         </Pressable>
         <Pressable accessibilityRole="button" accessibilityLabel={`Remover ${book.title}`}
           disabled={disabled} onPress={onRemove} style={styles.remove}>
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
   details: { flexDirection: 'row', gap: 16, alignItems: 'center' },
   title: { fontFamily: serif, fontSize: 24, color: colors.ink },
   author: { fontSize: 14, color: colors.muted, marginTop: 5 },
+  currentStatus: { fontSize: 12, color: colors.ink, marginTop: 10 },
   actions: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', marginTop: 12 },
   status: { minHeight: 44, justifyContent: 'center', paddingHorizontal: 12, backgroundColor: colors.soft, borderRadius: 6 },
   statusText: { fontSize: 13, color: colors.ink, fontWeight: '600' },

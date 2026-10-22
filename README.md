@@ -8,6 +8,7 @@ Um caderno de leituras feito com **React Native, JavaScript e Expo Go**. Projeto
 - Sugere livros e autores da Open Library durante a digitação; selecionar um livro preenche os dois campos.
 - Exibe capas nas sugestões, no cadastro e na estante. Imagens indisponíveis usam uma alternativa simples.
 - Permite marcar e desmarcar livros como lidos, filtrar a estante e remover com confirmação.
+- O cartão informa o status atual separadamente. Use “Marcar como lido” ou “Mover para Quero ler” para mudar o status; as abas no topo apenas filtram a lista.
 - Salva a estante no aparelho com AsyncStorage. Sem conta ou backend próprio.
 - Funciona sem internet para cadastro manual e gerenciamento; só as sugestões precisam de conexão.
 
